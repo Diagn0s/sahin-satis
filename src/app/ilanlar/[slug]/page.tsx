@@ -80,8 +80,15 @@ export default async function ListingDetailPage({ params }: { params: Params }) 
             {"★".repeat(listing.stars)}{"☆".repeat(5 - listing.stars)}
           </div>
 
-          <div className="font-heading font-extrabold text-3xl md:text-4xl text-sahred mb-4">
-            {listing.price} ₺
+          <div className="flex flex-col mb-4">
+            {listing.oldPrice && (
+              <span className="font-heading font-bold text-lg md:text-xl text-muted-foreground line-through">
+                {listing.oldPrice} ₺
+              </span>
+            )}
+            <span className="font-heading font-extrabold text-3xl md:text-4xl text-sahred">
+              {listing.price} ₺
+            </span>
           </div>
 
           <p className="text-sm text-muted-foreground leading-relaxed mb-6">

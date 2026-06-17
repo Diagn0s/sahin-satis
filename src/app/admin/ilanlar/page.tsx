@@ -1,7 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { PlusCircle, Trash2 } from "lucide-react";
+import { PlusCircle } from "lucide-react";
+import { ListingActions } from "./ListingActions";
 
 export const metadata = {
   title: "İlan Yönetimi",
@@ -71,15 +72,7 @@ export default async function AdminListingsPage() {
                       {listing.views}
                     </td>
                     <td className="px-6 py-4 text-right">
-                      {/* Delete action would go here. Server actions usually need a form. */}
-                      <form action={async () => {
-                        "use server";
-                        await prisma.listing.delete({ where: { id: listing.id } });
-                      }}>
-                        <Button variant="ghost" size="sm" type="submit" className="text-red-500 hover:text-red-600 hover:bg-red-50">
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                      </form>
+                      <ListingActions id={listing.id} />
                     </td>
                   </tr>
                 ))

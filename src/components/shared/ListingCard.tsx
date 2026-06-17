@@ -15,6 +15,7 @@ export interface Listing {
   categorySlug?: string;
   description: string;
   price: number | string;
+  oldPrice?: number | string | null;
   badge?: string | null;
   badgeLabel?: string | null;
   icon: string;
@@ -89,13 +90,17 @@ export function ListingCard({ listing, index = 0 }: { listing: Listing; index?: 
             <span className="flex items-center gap-1"><Eye className="w-3 h-3" /> {listing.views}</span>
             <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {listing.age}</span>
           </div>
-          <div className="flex items-center justify-between gap-2">
-            <div>
-              <StarRating stars={listing.stars} />
-              <div className="font-heading font-extrabold text-xl text-sahred">
+          {/* Price & Action */}
+          <div className="flex items-center justify-between mt-auto pt-4 border-t border-border">
+            <div className="flex flex-col">
+              {listing.oldPrice && (
+                <span className="text-xs text-muted-foreground line-through font-medium">
+                  {listing.oldPrice} ₺
+                </span>
+              )}
+              <span className="font-heading font-extrabold text-lg text-sahred leading-none">
                 {listing.price} ₺
-              </div>
-              <div className="text-[10px] text-muted-foreground">2. El Fiyat</div>
+              </span>
             </div>
             <form action={async (formData) => {
               // Client Component can call imported Server Action directly

@@ -68,6 +68,81 @@ export async function createListing(prevState: any, formData: FormData) {
   redirect("/admin/ilanlar");
 }
 
+export async function deleteListing(id: string) {
+  const session = await auth();
+  if (!session?.user || session.user.role !== "ADMIN") {
+    return { error: "Yetkisiz işlem." };
+  }
+
+  try {
+    await prisma.listing.delete({ where: { id } });
+  } catch (error) {
+    return { error: "İlan silinirken bir hata oluştu." };
+  }
+
+  revalidatePath("/admin/ilanlar");
+  revalidatePath("/ilanlar");
+  revalidatePath("/");
+  return { success: true };
+}
+
+export async function updateListing(prevState: any, formData: FormData) {
+  const session = await auth();
+  if (!session?.user || session.user.role !== "ADMIN") {
+    return { error: "Yetkisiz işlem." };
+  }
+
+  const id = formData.get("id") as string;
+  const title = formData.get("title") as string;
+  const description = formData.get("description") as string;
+  const price = formData.get("price") as string;
+  const oldPrice = formData.get("oldPrice") as string;
+  const categoryId = formData.get("categoryId") as string;
+  const icon = (formData.get("icon") as string) || "📦";
+  const badge = formData.get("badge") as string;
+  const badgeLabel = formData.get("badgeLabel") as string;
+  const image = formData.get("image") as File | null;
+
+  if (!id || !title || !description || !price || !categoryId) {
+    return { error: "Lütfen gerekli alanları doldurun." };
+  }
+
+  let imageUrl: string | undefined;
+  if (image && image.size > 0) {
+    try {
+      const blob = await put(image.name, image, { access: 'public' });
+      imageUrl = blob.url;
+    } catch (e) {
+      console.error("Blob upload error:", e);
+      return { error: "Görsel yüklenemedi." };
+    }
+  }
+
+  try {
+    await prisma.listing.update({
+      where: { id },
+      data: {
+        title,
+        description,
+        price: parseFloat(price.replace(/\./g, "").replace(/,/g, ".")),
+        oldPrice: oldPrice ? parseFloat(oldPrice.replace(/\./g, "").replace(/,/g, ".")) : null,
+        categoryId,
+        icon,
+        ...(imageUrl && { imageUrl }),
+        badge: badge || null,
+        badgeLabel: badgeLabel || null,
+      }
+    });
+  } catch (error) {
+    return { error: "Bir hata oluştu." };
+  }
+
+  revalidatePath("/admin/ilanlar");
+  revalidatePath(`/ilanlar`);
+  revalidatePath("/");
+  redirect("/admin/ilanlar");
+}
+
 export async function createCategory(prevState: any, formData: FormData) {
   const session = await auth();
   if (!session?.user || session.user.role !== "ADMIN") {

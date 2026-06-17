@@ -41,6 +41,7 @@ model Listing {
   slug        String @unique
   description String
   price       Float
+  oldPrice    Float?
 
   // UI related fields (since it's a specific design)
   badge      String? // e.g. "hot", "new"
@@ -67,7 +68,7 @@ model Order {
   user   User   @relation(fields: [userId], references: [id])
 
   listingId String
-  listing   Listing @relation(fields: [listingId], references: [id])
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 
   status String @default("PENDING") // PENDING, APPROVED, CANCELLED
 
@@ -93,7 +94,7 @@ model Review {
   user   User   @relation(fields: [userId], references: [id])
 
   orderId String @unique
-  order   Order  @relation(fields: [orderId], references: [id])
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
 }
