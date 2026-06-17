@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Şahin Satış — Güvenilir 2. El Alışveriş</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0a0a0f;--ink2:#2d2d3a;--ink3:#6b6b80;
+  --bg:#fafaf8;--surface:#ffffff;--border:#e8e8ec;--border2:#d0d0d8;
+  --accent:#e63946;--accent-dim:#fce8ea;
+  --gold:#f4a261;--gold-dim:#fef3e8;
+  --wa:#25D366;--wa-dim:#e7faf0;
+  --navy:#0f172a;--navy2:#1e293b;
+  --r4:4px;--r8:8px;--r12:12px;--r16:16px;--r24:24px;--r99:999px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;font-size:15px;line-height:1.6}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
+
+/* TOPBAR */
+.topbar{background:var(--navy);color:rgba(255,255,255,.6);font-size:12.5px;text-align:center;padding:8px 1rem}
+.topbar a{color:var(--wa);font-weight:600;text-decoration:none}
+
+/* NAV */
+nav{background:rgba(255,255,255,.93);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:900;padding:0 2rem;height:66px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.08)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.35rem;color:var(--navy);display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none}
+.logo-badge{width:33px;height:33px;background:var(--accent);border-radius:var(--r8);display:flex;align-items:center;justify-content:center;font-size:1rem}
+.logo em{color:var(--accent);font-style:normal}
+.nav-links{display:flex;gap:2px}
+.nl{padding:8px 13px;border-radius:var(--r8);font-size:.87rem;font-weight:500;color:var(--ink3);background:none;border:none;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.nl:hover,.nl.active{color:var(--ink);background:var(--border)}
+.nav-r{display:flex;gap:8px;align-items:center}
+
+/* BTN */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:var(--r8);font-size:.88rem;font-weight:600;cursor:pointer;border:none;transition:all .2s;font-family:'DM Sans',sans-serif;text-decoration:none;white-space:nowrap}
+.btn-ghost{background:transparent;color:var(--ink2);border:1.5px solid var(--border2)}
+.btn-ghost:hover{border-color:var(--ink2)}
+.btn-accent{background:var(--accent);color:#fff}
+.btn-accent:hover{background:#c1121f;transform:translateY(-1px);box-shadow:0 6px 20px rgba(230,57,70,.3)}
+.btn-wa{background:var(--wa);color:#fff}
+.btn-wa:hover{background:#1ebe5d;transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,.3)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--navy2);transform:translateY(-1px)}
+
+/* HERO */
+.hero{background:var(--navy);padding:6rem 2rem 5rem;position:relative;overflow:hidden}
+.hgeo{position:absolute;inset:0;pointer-events:none}
+.hgeo span{position:absolute;border-radius:50%;animation:hfloat 9s ease-in-out infinite}
+.hgeo span:nth-child(1){width:580px;height:580px;top:-200px;right:-120px;background:rgba(230,57,70,.07)}
+.hgeo span:nth-child(2){width:380px;height:380px;bottom:-80px;left:-80px;background:rgba(244,162,97,.06);animation-delay:4s}
+.hgeo span:nth-child(3){width:220px;height:220px;top:35%;left:42%;background:rgba(37,211,102,.04);animation-delay:7s}
+@keyframes hfloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(18px,-18px) scale(1.04)}}
+.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--r99);padding:5px 15px;font-size:.78rem;color:rgba(255,255,255,.65);font-weight:500;margin-bottom:1.4rem;letter-spacing:.4px}
+.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:3.5rem;color:#fff;line-height:1.07;letter-spacing:-1px}
+.hero h1 em{color:var(--accent);font-style:normal}
+.hero-sub{color:rgba(255,255,255,.5);font-size:.98rem;margin:1.4rem 0 2.4rem;line-height:1.78;font-weight:300;max-width:470px}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap}
+
+.search-box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r16);padding:1.8rem;backdrop-filter:blur(10px)}
+.search-box h3{font-family:'Syne',sans-serif;font-weight:700;color:#fff;font-size:1.05rem;margin-bottom:1.1rem}
+.s-wrap{position:relative;margin-bottom:10px}
+.s-wrap input{width:100%;padding:12px 46px 12px 14px;border:1.5px solid rgba(255,255,255,.15);border-radius:var(--r12);background:rgba(255,255,255,.08);color:#fff;font-size:.92rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+.s-wrap input::placeholder{color:rgba(255,255,255,.3)}
+.s-wrap input:focus{border-color:rgba(255,255,255,.35)}
+.s-wrap button{position:absolute;right:9px;top:50%;transform:translateY(-50%);background:var(--accent);border:none;border-radius:var(--r8);width:30px;height:30px;cursor:pointer;color:#fff;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.s-wrap button:hover{background:#c1121f}
+.scats{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.scat{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:var(--r8);padding:7px 11px;cursor:pointer;color:rgba(255,255,255,.65);font-size:.8rem;font-weight:500;transition:all .2s}
+.scat:hover{background:rgba(255,255,255,.12);color:#fff}
+
+/* TRUST */
+.trust-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:.9rem 2rem}
+.trust-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-around;flex-wrap:wrap;gap:1rem}
+.ti{display:flex;align-items:center;gap:9px;color:var(--ink3);font-size:.85rem;font-weight:500}
+.ti strong{color:var(--ink);font-weight:700}
+.ti-icon{width:34px;height:34px;border-radius:var(--r8);display:flex;align-items:center;justify-content:center;font-size:.95rem}
+.ic-red{background:var(--accent-dim)}.ic-green{background:var(--wa-dim)}.ic-gold{background:var(--gold-dim)}.ic-blue{background:#e8f0fe}
+
+/* SECTION */
+.sec{max-width:1200px;margin:0 auto;padding:4.5rem 2rem}
+.sec-hd{margin-bottom:2.8rem}
+.sec-hd h2{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;color:var(--ink);letter-spacing:-.5px}
+.sec-hd p{color:var(--ink3);font-size:.9rem;margin-top:5px}
+.sec-hd-row{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem}
+
+/* CHIPS */
+.chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:1.8rem}
+.chip{display:flex;align-items:center;gap:7px;padding:7px 16px;border-radius:var(--r99);border:1.5px solid var(--border2);background:var(--surface);color:var(--ink2);font-size:.83rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
+.chip:hover,.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip.on{background:var(--accent);border-color:var(--accent)}
+.chip-cnt{font-size:.72rem;background:var(--border);padding:2px 7px;border-radius:var(--r99);color:var(--ink3);font-weight:500;transition:all .2s}
+.chip.on .chip-cnt,.chip:hover .chip-cnt{background:rgba(255,255,255,.2);color:#fff}
+
+/* PRODUCTS */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.pc{background:var(--surface);border-radius:var(--r16);border:1px solid var(--border);overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s;cursor:pointer}
+.pc:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,.1);border-color:var(--border2)}
+.pc:hover .pci{transform:scale(1.04)}
+.pimg{height:205px;overflow:hidden;position:relative}
+.pci{height:100%;display:flex;align-items:center;justify-content:center;font-size:5.5rem;transition:transform .4s}
+.pfav{position:absolute;top:11px;right:11px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.9);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:all .2s;color:var(--ink3)}
+.pfav:hover,.pfav.on{color:var(--accent);transform:scale(1.12)}
+.bwrap{position:absolute;top:11px;left:11px;display:flex;flex-direction:column;gap:4px}
+.b{display:inline-block;padding:3px 9px;border-radius:var(--r4);font-size:.68rem;font-weight:700;letter-spacing:.5px}
+.b-hot{background:var(--accent);color:#fff}
+.b-new{background:#059669;color:#fff}
+.pb{padding:1.2rem 1.2rem}
+.pcat{font-size:.73rem;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.ptitle{font-family:'Syne',sans-serif;font-weight:700;font-size:.97rem;color:var(--ink);margin-bottom:5px;line-height:1.3}
+.pdesc{font-size:.82rem;color:var(--ink3);font-weight:300;line-height:1.55;margin-bottom:12px}
+.pmeta{display:flex;gap:10px;font-size:.73rem;color:var(--ink3);margin-bottom:.9rem}
+.pfoot{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.pprice .am{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--accent)}
+.pprice .lbl{font-size:.68rem;color:var(--ink3)}
+.pstars{font-size:.7rem;color:#f59e0b;margin-bottom:2px}
+
+/* STEPS */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:20px}
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r16);padding:2rem 1.5rem;text-align:center;transition:all .3s}
+.sc:hover{border-color:var(--accent);box-shadow:0 8px 28px rgba(230,57,70,.1)}
+.sn{width:50px;height:50px;border-radius:var(--r12);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;margin:0 auto 1.1rem;color:#fff;background:var(--accent)}
+.sc h3{font-family:'Syne',sans-serif;font-weight:700;font-size:.97rem;color:var(--ink);margin-bottom:7px}
+.sc p{font-size:.83rem;color:var(--ink3);line-height:1.65;font-weight:300}
+
+/* STATS */
+.stats-sec{background:var(--navy);padding:3.5rem 2rem}
+.sgrid2{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,.05);border-radius:var(--r16);overflow:hidden;border:1px solid rgba(255,255,255,.07)}
+.si{padding:2.4rem 2rem;text-align:center;background:var(--navy);transition:background .2s}
+.si:hover{background:rgba(255,255,255,.03)}
+.sn2{font-family:'Syne',sans-serif;font-weight:800;font-size:2.7rem;line-height:1;margin-bottom:5px}
+.sl{font-size:.82rem;color:rgba(255,255,255,.45);font-weight:400}
+.sn2.red{color:var(--accent)}.sn2.gold{color:var(--gold)}.sn2.green{color:var(--wa)}.sn2.white{color:#fff}
+
+/* CTA */
+.cta-strip{background:var(--accent);padding:3rem 2rem;position:relative;overflow:hidden}
+.cta-strip::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;background:rgba(255,255,255,.07);border-radius:50%}
+.cta-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;position:relative;z-index:1}
+.cta-inner h2{font-family:'Syne',sans-serif;font-weight:800;font-size:1.85rem;color:#fff;letter-spacing:-.3px}
+.cta-inner p{color:rgba(255,255,255,.72);font-size:.93rem;margin-top:5px;font-weight:300}
+.cta-btns{display:flex;gap:9px;flex-wrap:wrap}
+.btn-white{background:#fff;color:var(--accent);font-weight:700}
+.btn-white:hover{background:#f0f0f0;transform:translateY(-1px)}
+.btn-owh{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.45)}
+.btn-owh:hover{background:rgba(255,255,255,.1)}
+
+/* TESTIMONIALS */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.tc2{background:var(--surface);border:1px solid var(--border);border-radius:var(--r16);padding:1.5rem;transition:all .3s}
+.tc2:hover{border-color:var(--border2);box-shadow:0 8px 22px rgba(0,0,0,.07)}
+.th{display:flex;align-items:center;gap:11px;margin-bottom:.9rem}
+.tav{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;color:#fff;flex-shrink:0}
+.av1{background:linear-gradient(135deg,#e63946,#c1121f)}.av2{background:linear-gradient(135deg,#059669,#047857)}.av3{background:linear-gradient(135deg,#7c3aed,#5b21b6)}.av4{background:linear-gradient(135deg,#f59e0b,#d97706)}
+.tname{font-weight:600;font-size:.92rem;color:var(--ink)}
+.trole{font-size:.76rem;color:var(--ink3)}
+.tstars{font-size:.73rem;color:#f59e0b;margin-bottom:8px}
+.ttxt{font-size:.85rem;color:var(--ink3);line-height:1.7;font-weight:300}
+
+/* FOOTER */
+footer{background:#060912;color:rgba(255,255,255,.48);padding:4rem 2rem 2rem}
+.fgrid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.8rem}
+.fbrand p{font-size:.85rem;line-height:1.75;font-weight:300;margin-top:.9rem;max-width:280px}
+.fcontact{display:flex;flex-direction:column;gap:7px;margin-top:1.1rem}
+.fcontact a{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.55);text-decoration:none;font-size:.84rem;transition:color .2s}
+.fcontact a:hover{color:#fff}
+.fli{width:28px;height:28px;border-radius:var(--r8);background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+footer h5{color:rgba(255,255,255,.82);font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;margin-bottom:.9rem;letter-spacing:.3px}
+footer ul{list-style:none}
+footer ul li{font-size:.83rem;padding:4px 0;cursor:pointer;transition:color .2s}
+footer ul li:hover{color:#fff}
+.fbot{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.07);padding-top:1.4rem;display:flex;justify-content:space-between;font-size:.78rem;flex-wrap:wrap;gap:8px}
+.fbadge{display:inline-flex;align-items:center;gap:6px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.18);border-radius:var(--r99);padding:4px 13px;color:var(--wa);font-size:.76rem;font-weight:600}
+
+/* MODALS */
+.ovl{display:none;position:fixed;inset:0;background:rgba(10,10,20,.6);z-index:1000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px)}
+.ovl.open{display:flex}
+.modal{background:var(--surface);border-radius:var(--r24);width:100%;max-width:470px;overflow:hidden;animation:mIn .3s cubic-bezier(.34,1.56,.64,1)}
+@keyframes mIn{from{transform:scale(.9) translateY(18px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+.mhd{padding:1.7rem 1.8rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.mhd h2{font-family:'Syne',sans-serif;font-weight:800;font-size:1.35rem;color:var(--ink)}
+.mcls{background:var(--border);border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:.85rem;color:var(--ink3);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.mcls:hover{background:var(--border2)}
+.mbdy{padding:1.7rem 1.8rem}
+.tpills{display:flex;gap:3px;background:var(--border);border-radius:var(--r8);padding:3px;margin-bottom:1.7rem}
+.tp{flex:1;padding:8px;text-align:center;border-radius:var(--r4);font-size:.86rem;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--ink3);transition:all .2s;font-family:'DM Sans',sans-serif}
+.tp.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.tcnt{display:none}.tcnt.on{display:block}
+.fg{margin-bottom:1rem}
+.fg label{display:block;font-size:.8rem;font-weight:600;color:var(--ink2);margin-bottom:4px}
+.fg input,.fg select,.fg textarea{width:100%;padding:10px 13px;border:1.5px solid var(--border2);border-radius:var(--r8);font-size:.9rem;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;transition:border-color .2s;background:var(--bg)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--accent)}
+.fg textarea{resize:vertical;min-height:80px}
+.div{display:flex;align-items:center;gap:10px;margin:1rem 0;color:var(--ink3);font-size:.8rem}
+.div::before,.div::after{content:'';flex:1;height:1px;background:var(--border)}
+.fgr{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.fnote{font-size:.76rem;color:var(--ink3);text-align:center;margin-top:.9rem}
+.fnote a{color:var(--accent);cursor:pointer}
+
+/* PRODUCT MODAL */
+.pmod{max-width:680px}
+.pmgrid{display:grid;grid-template-columns:1.1fr 1fr;gap:1.8rem;align-items:start}
+.pmimg{height:265px;background:var(--bg);border-radius:var(--r12);display:flex;align-items:center;justify-content:center;font-size:6.5rem}
+.pminfo h3{font-family:'Syne',sans-serif;font-weight:800;font-size:1.18rem;color:var(--ink);margin-bottom:7px}
+.pmprice{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;color:var(--accent);margin:10px 0}
+.pmrow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:.83rem}
+.pmrow span:first-child{color:var(--ink3)}
+.pmrow span:last-child{font-weight:600;color:var(--ink)}
+.pma{display:flex;flex-direction:column;gap:7px;margin-top:1rem}
+
+/* ADMIN */
+.adm-ovl{display:none;position:fixed;inset:0;background:rgba(10,10,20,.75);z-index:2000;align-items:flex-start;justify-content:center;padding:1rem;backdrop-filter:blur(6px);overflow-y:auto}
+.adm-ovl.open{display:flex}
+.adm-panel{background:var(--surface);border-radius:var(--r24);width:100%;max-width:980px;margin:auto;animation:mIn .3s cubic-bezier(.34,1.56,.64,1)}
+.adm-nav{background:var(--navy);border-radius:var(--r24) var(--r24) 0 0;padding:1.1rem 1.8rem;display:flex;align-items:center;justify-content:space-between}
+.adm-nav h2{font-family:'Syne',sans-serif;font-weight:800;color:#fff;font-size:1.15rem;display:flex;align-items:center;gap:9px}
+.adm-nav h2 span{font-size:.73rem;background:var(--accent);color:#fff;padding:2px 9px;border-radius:var(--r99);font-family:'DM Sans',sans-serif;font-weight:600}
+.adm-body{padding:1.8rem}
+.adm-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:1.8rem}
+.as{background:var(--bg);border-radius:var(--r12);padding:1.1rem;border:1px solid var(--border)}
+.as .v{font-family:'Syne',sans-serif;font-weight:800;font-size:1.7rem;margin-bottom:1px}
+.as .l{font-size:.76rem;color:var(--ink3);font-weight:500}
+.as.red .v{color:var(--accent)}.as.green .v{color:#059669}.as.blue .v{color:#1d4ed8}.as.gold .v{color:#d97706}
+.adm-tabs{display:flex;gap:3px;margin-bottom:1.4rem;border-bottom:1px solid var(--border)}
+.at{padding:7px 16px;border:none;background:none;font-size:.85rem;font-weight:600;cursor:pointer;color:var(--ink3);border-bottom:2.5px solid transparent;margin-bottom:-1px;font-family:'DM Sans',sans-serif;transition:all .2s}
+.at.on{color:var(--accent);border-bottom-color:var(--accent)}
+.twrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r12)}
+table{width:100%;border-collapse:collapse}
+thead tr{background:var(--bg)}
+th{padding:11px 13px;text-align:left;font-size:.75rem;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
+td{padding:12px 13px;border-top:1px solid var(--border);font-size:.85rem;color:var(--ink2);vertical-align:middle}
+tr:hover td{background:#fafaf9}
+.sp{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:var(--r99);font-size:.73rem;font-weight:600}
+.sp-new{background:#fef3c7;color:#92400e}.sp-proc{background:#dbeafe;color:#1e40af}.sp-done{background:#d1fae5;color:#065f46}.sp-cancel{background:#fee2e2;color:#991b1b}
+.tdb{padding:5px 11px;border-radius:var(--r4);border:1px solid var(--border2);background:var(--surface);font-size:.76rem;font-weight:600;cursor:pointer;color:var(--ink2);transition:all .2s;font-family:'DM Sans',sans-serif}
+.tdb:hover{background:var(--border)}
+.tdb.wa{border-color:var(--wa);color:var(--wa);background:var(--wa-dim)}
+.tdb.wa:hover{background:var(--wa);color:#fff}
+.adm-login{max-width:300px;margin:0 auto;padding:2.5rem 0}
+.adm-login h3{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;margin-bottom:.4rem;text-align:center}
+.adm-login p{color:var(--ink3);font-size:.85rem;text-align:center;margin-bottom:1.8rem}
+.hint{font-size:.75rem;color:var(--ink3);text-align:center;background:var(--bg);border-radius:var(--r8);padding:9px;margin-top:.9rem}
+.hint strong{color:var(--ink)}
+
+/* TOAST */
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:var(--r99);font-size:.85rem;font-weight:500;z-index:9999;transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .4s;opacity:0;pointer-events:none;white-space:nowrap;display:flex;align-items:center;gap:7px;box-shadow:0 8px 28px rgba(0,0,0,.2)}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+#toast.success{background:#059669}
+#toast.error{background:var(--accent)}
+
+/* WA FLOAT */
+.waf{position:fixed;bottom:26px;right:26px;z-index:800;display:flex;align-items:center;gap:9px;background:var(--wa);color:#fff;padding:11px 20px 11px 14px;border-radius:var(--r99);text-decoration:none;font-weight:700;font-size:.85rem;box-shadow:0 6px 22px rgba(37,211,102,.4);transition:all .3s;font-family:'DM Sans',sans-serif}
+.waf:hover{box-shadow:0 10px 32px rgba(37,211,102,.55);transform:translateY(-3px)}
+.wdot{width:7px;height:7px;background:#fff;border-radius:50%;animation:wblink 2s infinite}
+@keyframes wblink{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* FADE */
+.fi{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
+.fi.vis{opacity:1;transform:translateY(0)}
+
+/* BG SECTIONS */
+.bg-surf{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+
+/* PRODUCT BG COLORS */
+.c1{background:#eef4ff}.c2{background:#f0f9f0}.c3{background:#f5f0ff}.c4{background:#fff8f0}.c5{background:#fff0f0}.c6{background:#f0f9ff}
+
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr;gap:2.5rem}.fgrid{grid-template-columns:1fr 1fr}.sgrid2{grid-template-columns:repeat(2,1fr)}.adm-stats{grid-template-columns:repeat(2,1fr)}.pmgrid{grid-template-columns:1fr}}
+@media(max-width:600px){.nav-links{display:none}.hero h1{font-size:2.3rem}.sgrid2{grid-template-columns:1fr 1fr}.cta-inner{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+
+<div class="topbar">🔥 Türkiye'nin güvenilir 2. el platformu — Sorular için: <a href="https://wa.me/905331685213" target="_blank">0533 168 52 13</a></div>
+
+<nav id="nav">
+  <a class="logo" onclick="goTop()"><div class="logo-badge">🦅</div>Şahin<em>Satış</em></a>
+  <div class="nav-links">
+    <button class="nl on" onclick="goTop()">Ana Sayfa</button>
+    <button class="nl" onclick="goTo('urunler')">İlanlar</button>
+    <button class="nl" onclick="goTo('nasil')">Nasıl Çalışır?</button>
+    <button class="nl" onclick="goTo('yorumlar')">Yorumlar</button>
+    <button class="nl" onclick="openAdm()">Admin</button>
+  </div>
+  <div class="nav-r">
+    <button class="btn btn-ghost" onclick="openAuth('login')">Giriş Yap</button>
+    <button class="btn btn-accent" onclick="openAuth('register')">Ücretsiz Üye Ol</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hgeo"><span></span><span></span><span></span></div>
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">🟢 Türkiye'nin Güvenilir 2. El Platformu</div>
+      <h1>Akıllıca Al,<br>Hızlıca <em>Sat.</em></h1>
+      <p class="hero-sub">Binlerce ikinci el ürün, güvenilir satıcılar ve WhatsApp üzerinden anlık iletişim. Şahin Satış ile kazanmaya başla.</p>
+      <div class="hero-btns">
+        <button class="btn btn-accent" style="padding:12px 26px;font-size:.93rem" onclick="goTo('urunler')">İlanları Keşfet →</button>
+        <a class="btn btn-wa" style="padding:12px 26px;font-size:.93rem" href="https://wa.me/905331685213?text=Merhaba!%20Şahin%20Satış%27tan%20bilgi%20almak%20istiyorum." target="_blank">💬 WhatsApp</a>
+        <button class="btn" style="background:rgba(255,255,255,.08);color:#fff;border:1.5px solid rgba(255,255,255,.14);padding:12px 26px;font-size:.93rem" onclick="openAuth('register')">İlan Ver</button>
+      </div>
+    </div>
+    <div class="search-box">
+      <h3>🔍 Ürün Ara</h3>
+      <div class="s-wrap">
+        <input type="text" id="hs" placeholder="iPhone, laptop, koltuk...">
+        <button onclick="doSearch()">→</button>
+      </div>
+      <div class="scats">
+        <div class="scat" onclick="filt('Telefon & Tablet')">📱 Telefon</div>
+        <div class="scat" onclick="filt('Bilgisayar')">💻 Bilgisayar</div>
+        <div class="scat" onclick="filt('Ev & Mobilya')">🏠 Mobilya</div>
+        <div class="scat" onclick="filt('Oyun & Konsol')">🎮 Konsol</div>
+        <div class="scat" onclick="filt('Fotoğraf')">📷 Kamera</div>
+        <div class="scat" onclick="filt('Araç & Motor')">🚗 Araç</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="ti"><div class="ti-icon ic-red">🛡️</div><div><strong>Güvenli</strong> Alışveriş</div></div>
+    <div class="ti"><div class="ti-icon ic-green">💬</div><div>WhatsApp ile <strong>Anlık Destek</strong></div></div>
+    <div class="ti"><div class="ti-icon ic-gold">⚡</div><div><strong>Hızlı</strong> İlan Yayını</div></div>
+    <div class="ti"><div class="ti-icon ic-blue">✅</div><div><strong>Onaylı</strong> Satıcılar</div></div>
+    <div class="ti"><div class="ti-icon ic-red">📦</div><div><strong>850+</strong> Aktif İlan</div></div>
+  </div>
+</div>
+
+<div id="urunler"><div class="sec">
+  <div class="sec-hd-row sec-hd">
+    <div><h2>Öne Çıkan İlanlar</h2><p>Satın almak için WhatsApp'tan iletişime geçin</p></div>
+    <span id="pcnt" style="font-size:.8rem;color:var(--ink3);font-weight:500"></span>
+  </div>
+  <div class="chips">
+    <div class="chip on" onclick="filt('Tümü')">Tümü <span class="chip-cnt">6</span></div>
+    <div class="chip" onclick="filt('Telefon & Tablet')">📱 Telefon <span class="chip-cnt">1</span></div>
+    <div class="chip" onclick="filt('Bilgisayar')">💻 Bilgisayar <span class="chip-cnt">1</span></div>
+    <div class="chip" onclick="filt('Oyun & Konsol')">🎮 Konsol <span class="chip-cnt">1</span></div>
+    <div class="chip" onclick="filt('Fotoğraf')">📷 Fotoğraf <span class="chip-cnt">1</span></div>
+    <div class="chip" onclick="filt('Ev & Mobilya')">🏠 Mobilya <span class="chip-cnt">1</span></div>
+    <div class="chip" onclick="filt('Giyim & Aksesuar')">⌚ Aksesuar <span class="chip-cnt">1</span></div>
+  </div>
+  <div class="pgrid" id="pgrid"></div>
+</div></div>
+
+<div class="stats-sec">
+  <div style="text-align:center;margin-bottom:2rem"><h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.9rem;color:#fff;letter-spacing:-.4px">Rakamlarla Şahin Satış</h2><p style="color:rgba(255,255,255,.4);font-size:.88rem;margin-top:4px">Güvenin kanıtı</p></div>
+  <div class="sgrid2">
+    <div class="si"><div class="sn2 red">850+</div><div class="sl">Aktif İlan</div></div>
+    <div class="si"><div class="sn2 gold">1.240</div><div class="sl">Mutlu Müşteri</div></div>
+    <div class="si"><div class="sn2 green">%98.4</div><div class="sl">Memnuniyet</div></div>
+    <div class="si"><div class="sn2 white">7/24</div><div class="sl">WhatsApp Destek</div></div>
+  </div>
+</div>
+
+<div id="nasil" class="bg-surf"><div class="sec">
+  <div class="sec-hd" style="text-align:center"><h2>Nasıl Çalışır?</h2><p>4 adımda güvenli alışveriş</p></div>
+  <div class="sgrid">
+    <div class="sc fi"><div class="sn">1</div><h3>Üye Ol</h3><p>Ad, e-posta ve telefon numaranızla 30 saniyede ücretsiz hesap oluşturun.</p></div>
+    <div class="sc fi"><div class="sn">2</div><h3>İlanları Gözat</h3><p>Kategoriye göre filtreleyin, detayları inceleyin, favorilerinize ekleyin.</p></div>
+    <div class="sc fi"><div class="sn">3</div><h3>WhatsApp'tan Yaz</h3><p>"Satın Al" butonuna tıklayın. Doğrudan WhatsApp'a yönlenin, anında iletişim kurun.</p></div>
+    <div class="sc fi"><div class="sn">4</div><h3>Teslim Al</h3><p>Ödeme yönteminizi belirleyin, anlaşın ve ürününüzü güvenle teslim alın.</p></div>
+  </div>
+</div></div>
+
+<div class="cta-strip">
+  <div class="cta-inner">
+    <div><h2>Ürününüzü Satmak İster misiniz?</h2><p>Ücretsiz ilan verin, binlerce alıcıya ulaşın. Çok kolay!</p></div>
+    <div class="cta-btns">
+      <a class="btn btn-white" href="https://wa.me/905331685213?text=Merhaba!%20Ürün%20satmak%20istiyorum." target="_blank">💬 WhatsApp'tan Sat</a>
+      <button class="btn btn-owh" onclick="openAuth('register')">Ücretsiz Üye Ol →</button>
+    </div>
+  </div>
+</div>
+
+<div id="yorumlar"><div class="sec">
+  <div class="sec-hd" style="text-align:center"><h2>Müşteri Yorumları</h2><p>Binlerce memnun kullanıcı arasına katılın</p></div>
+  <div class="tgrid">
+    <div class="tc2 fi"><div class="th"><div class="tav av1">MY</div><div><div class="tname">Mehmet Yılmaz</div><div class="trole">İstanbul</div></div></div><div class="tstars">★★★★★</div><p class="ttxt">iPhone 13'ü çok uygun fiyata aldım. WhatsApp'tan hızlı yanıt geldi, kargo aynı gün kargoya verildi. Kesinlikle tavsiye ederim!</p></div>
+    <div class="tc2 fi"><div class="th"><div class="tav av2">AK</div><div><div class="tname">Ayşe Kara</div><div class="trole">Ankara</div></div></div><div class="tstars">★★★★★</div><p class="ttxt">MacBook'umu sattım, 2 saatte alıcı bulundu. Site çok kullanışlı, admin çok yardımsever. Tekrar kullanacağım.</p></div>
+    <div class="tc2 fi"><div class="th"><div class="tav av3">AD</div><div><div class="tname">Ali Demir</div><div class="trole">İzmir</div></div></div><div class="tstars">★★★★★</div><p class="ttxt">PS5 alışverişimde sıfır sorun yaşadım. Ürün tam tanımlandığı gibi geldi. Şahin Satış'a güveniyorum!</p></div>
+    <div class="tc2 fi"><div class="th"><div class="tav av4">FŞ</div><div><div class="tname">Fatma Şahin</div><div class="trole">Bursa</div></div></div><div class="tstars">★★★★☆</div><p class="ttxt">Koltuk takımını buradan aldım. Fotoğraflar gerçeği yansıtıyor, fiyat piyasanın çok altında. Çok memnunum.</p></div>
+  </div>
+</div></div>
+
+<footer>
+  <div class="fgrid">
+    <div class="fbrand">
+      <div class="logo" style="cursor:default"><div class="logo-badge">🦅</div>Şahin<em>Satış</em></div>
+      <p>Türkiye'nin güvenilir 2. el alışveriş platformu. Kaliteli ürünler, dürüst satıcılar, hızlı iletişim.</p>
+      <div class="fcontact">
+        <a href="https://wa.me/905331685213" target="_blank"><div class="fli">💬</div>0533 168 52 13 — WhatsApp</a>
+        <a href="mailto:info@sahinsatis.com"><div class="fli">📧</div>info@sahinsatis.com</a>
+        <a><div class="fli">📍</div>Türkiye geneli hizmet</a>
+      </div>
+    </div>
+    <div><h5>Site</h5><ul><li onclick="goTop()">Ana Sayfa</li><li onclick="goTo('urunler')">İlanlar</li><li onclick="goTo('nasil')">Nasıl Çalışır?</li><li onclick="goTo('yorumlar')">Yorumlar</li></ul></div>
+    <div><h5>Kategoriler</h5><ul><li onclick="filt('Telefon & Tablet')">Telefon & Tablet</li><li onclick="filt('Bilgisayar')">Bilgisayar</li><li onclick="filt('Ev & Mobilya')">Ev & Mobilya</li><li onclick="filt('Oyun & Konsol')">Oyun & Konsol</li><li onclick="filt('Fotoğraf')">Fotoğraf</li><li onclick="filt('Araç & Motor')">Araç & Motor</li></ul></div>
+    <div><h5>Hesap</h5><ul><li onclick="openAuth('register')">Üye Ol</li><li onclick="openAuth('login')">Giriş Yap</li><li onclick="openAdm()">Admin Girişi</li><li>Gizlilik Politikası</li><li>Kullanım Koşulları</li><li>Yardım Merkezi</li></ul></div>
+  </div>
+  <div class="fbot">
+    <span>© 2024 Şahin Satış. Tüm hakları saklıdır.</span>
+    <div class="fbadge">🟢 7/24 Aktif Destek</div>
+    <span>Güvenli Alışveriş Platformu</span>
+  </div>
+</footer>
+
+<a class="waf" href="https://wa.me/905331685213?text=Merhaba!%20Şahin%20Satış%27tan%20yardım%20almak%20istiyorum." target="_blank">
+  <div class="wdot"></div>💬 WhatsApp Destek
+</a>
+
+<div id="toast"></div>
+
+<!-- AUTH MODAL -->
+<div class="ovl" id="aOvl" onclick="cOvl(event,'aOvl')">
+  <div class="modal">
+    <div class="mhd"><h2 id="aTitle">Giriş Yapın</h2><button class="mcls" onclick="cModal('aOvl')">✕</button></div>
+    <div class="mbdy">
+      <div class="tpills"><button class="tp on" id="tp-l" onclick="swTab('l')">Giriş Yap</button><button class="tp" id="tp-r" onclick="swTab('r')">Üye Ol</button></div>
+      <div class="tcnt on" id="tc-l">
+        <div class="fg"><label>E-posta</label><input type="email" placeholder="ornek@mail.com"></div>
+        <div class="fg"><label>Şifre</label><input type="password" placeholder="••••••••"></div>
+        <button class="btn btn-accent" style="width:100%;padding:12px;font-size:.92rem;justify-content:center" onclick="doLogin()">Giriş Yap</button>
+        <div class="div">veya</div>
+        <a href="https://wa.me/905331685213?text=Merhaba!%20Giriş%20yapmak%20istiyorum." target="_blank" style="display:block"><button class="btn btn-wa" style="width:100%;padding:12px;font-size:.92rem;justify-content:center">💬 WhatsApp ile Devam Et</button></a>
+        <p class="fnote">Hesabınız yok mu? <a onclick="swTab('r')">Üye olun!</a></p>
+      </div>
+      <div class="tcnt" id="tc-r">
+        <div class="fgr"><div class="fg"><label>Ad</label><input type="text" placeholder="Adınız"></div><div class="fg"><label>Soyad</label><input type="text" placeholder="Soyadınız"></div></div>
+        <div class="fg"><label>E-posta</label><input type="email" placeholder="ornek@mail.com"></div>
+        <div class="fg"><label>Telefon</label><input type="tel" placeholder="05XX XXX XX XX"></div>
+        <div class="fg"><label>Şifre</label><input type="password" placeholder="En az 8 karakter"></div>
+        <button class="btn btn-accent" style="width:100%;padding:12px;font-size:.92rem;justify-content:center" onclick="doReg()">Ücretsiz Üye Ol →</button>
+        <div class="div">veya</div>
+        <a href="https://wa.me/905331685213?text=Merhaba!%20Yeni%20üyelik%20oluşturmak%20istiyorum." target="_blank" style="display:block"><button class="btn btn-wa" style="width:100%;padding:12px;font-size:.92rem;justify-content:center">💬 WhatsApp ile Kayıt Ol</button></a>
+        <p class="fnote">Zaten üye misiniz? <a onclick="swTab('l')">Giriş yapın.</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="ovl" id="pOvl" onclick="cOvl(event,'pOvl')">
+  <div class="modal pmod">
+    <div class="mhd"><h2 id="pMTitle">Ürün Detayı</h2><button class="mcls" onclick="cModal('pOvl')">✕</button></div>
+    <div class="mbdy"><div class="pmgrid" id="pMBody"></div></div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="adm-ovl" id="admOvl" onclick="cOvl(event,'admOvl')">
+  <div class="adm-panel">
+    <div class="adm-nav">
+      <h2>🛡️ Admin Paneli <span>Şahin Satış</span></h2>
+      <button class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.18)" onclick="cModal('admOvl')">✕ Kapat</button>
+    </div>
+    <div class="adm-body">
+      <div id="admLog">
+        <div class="adm-login">
+          <h3>Admin Girişi</h3>
+          <p>Yönetim paneline erişmek için bilgilerinizi girin</p>
+          <div class="fg"><label>Kullanıcı Adı</label><input id="aU" type="text" placeholder="Kullanıcı adı"></div>
+          <div class="fg"><label>Şifre</label><input id="aP" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')admLogin()"></div>
+          <button class="btn btn-navy" style="width:100%;padding:12px;font-size:.92rem;justify-content:center" onclick="admLogin()">Giriş Yap →</button>
+          <div class="hint">Demo: <strong>admin</strong> / <strong>admin123</strong></div>
+        </div>
+      </div>
+      <div id="admDash" style="display:none">
+        <div class="adm-stats">
+          <div class="as red"><div class="v">12</div><div class="l">Yeni Sipariş</div></div>
+          <div class="as green"><div class="v">47</div><div class="l">Toplam Sipariş</div></div>
+          <div class="as blue"><div class="v">850</div><div class="l">Aktif İlan</div></div>
+          <div class="as gold"><div class="v">1.240</div><div class="l">Kayıtlı Üye</div></div>
+        </div>
+        <div class="adm-tabs">
+          <button class="at on" onclick="aTab(this,'aO')">📋 Siparişler</button>
+          <button class="at" onclick="aTab(this,'aP')">📦 Ürünler</button>
+          <button class="at" onclick="aTab(this,'aU')">👥 Üyeler</button>
+        </div>
+        <div id="aO"><div class="twrap"><table>
+          <thead><tr><th>#</th><th>Müşteri</th><th>Ürün</th><th>Fiyat</th><th>Tarih</th><th>Durum</th><th>İşlem</th></tr></thead>
+          <tbody>
+            <tr><td><strong>#1047</strong></td><td>Mehmet Y.<br><small style="color:var(--ink3)">0532 XXX XX XX</small></td><td>iPhone 13 Pro Max</td><td><strong>18.500 ₺</strong></td><td>15 May</td><td><span class="sp sp-new">● Yeni</span></td><td><a href="https://wa.me/905331685213" target="_blank"><button class="tdb wa">💬 Yanıtla</button></a></td></tr>
+            <tr><td><strong>#1046</strong></td><td>Ayşe K.<br><small style="color:var(--ink3)">0541 XXX XX XX</small></td><td>MacBook Air M2</td><td><strong>32.000 ₺</strong></td><td>14 May</td><td><span class="sp sp-proc">⟳ İşlemde</span></td><td><a href="https://wa.me/905331685213" target="_blank"><button class="tdb wa">💬 Yanıtla</button></a></td></tr>
+            <tr><td><strong>#1045</strong></td><td>Ali D.<br><small style="color:var(--ink3)">0553 XXX XX XX</small></td><td>PlayStation 5</td><td><strong>22.000 ₺</strong></td><td>13 May</td><td><span class="sp sp-done">✓ Tamamlandı</span></td><td><a href="https://wa.me/905331685213" target="_blank"><button class="tdb wa">💬 Yanıtla</button></a></td></tr>
+            <tr><td><strong>#1044</strong></td><td>Fatma Ş.<br><small style="color:var(--ink3)">0505 XXX XX XX</small></td><td>Canon EOS R50</td><td><strong>28.500 ₺</strong></td><td>12 May</td><td><span class="sp sp-new">● Yeni</span></td><td><a href="https://wa.me/905331685213" target="_blank"><button class="tdb wa">💬 Yanıtla</button></a></td></tr>
+            <tr><td><strong>#1043</strong></td><td>Hasan K.<br><small style="color:var(--ink3)">0533 XXX XX XX</small></td><td>Koltuk Takımı</td><td><strong>8.500 ₺</strong></td><td>11 May</td><td><span class="sp sp-done">✓ Tamamlandı</span></td><td><a href="https://wa.me/905331685213" target="_blank"><button class="tdb wa">💬 Yanıtla</button></a></td></tr>
+            <tr><td><strong>#1042</strong></td><td>Zeynep A.<br><small style="color:var(--ink3)">0544 XXX XX XX</small></td><td>Galaxy Watch 6</td><td><strong>7.200 ₺</strong></td><td>10 May</td><td><span class="sp sp-cancel">✕ İptal</span></td><td><a href="https://wa.me/905331685213" target="_blank"><button class="tdb wa">💬 Yanıtla</button></a></td></tr>
+          </tbody>
+        </table></div></div>
+        <div id="aP" style="display:none"><div class="twrap"><table>
+          <thead><tr><th>Ürün</th><th>Kategori</th><th>Fiyat</th><th>Durum</th><th>İşlem</th></tr></thead>
+          <tbody>
+            <tr><td><strong>iPhone 13 Pro Max 256GB</strong></td><td>Telefon</td><td>18.500 ₺</td><td><span class="sp sp-done">✓ Aktif</span></td><td><button class="tdb">Düzenle</button></td></tr>
+            <tr><td><strong>MacBook Air M2 8GB</strong></td><td>Bilgisayar</td><td>32.000 ₺</td><td><span class="sp sp-done">✓ Aktif</span></td><td><button class="tdb">Düzenle</button></td></tr>
+            <tr><td><strong>PlayStation 5 + 2 Kol</strong></td><td>Oyun & Konsol</td><td>22.000 ₺</td><td><span class="sp sp-proc">⟳ Beklemede</span></td><td><button class="tdb">Düzenle</button></td></tr>
+            <tr><td><strong>Canon EOS R50</strong></td><td>Fotoğraf</td><td>28.500 ₺</td><td><span class="sp sp-done">✓ Aktif</span></td><td><button class="tdb">Düzenle</button></td></tr>
+            <tr><td><strong>İkea Koltuk Takımı</strong></td><td>Ev & Mobilya</td><td>8.500 ₺</td><td><span class="sp sp-done">✓ Aktif</span></td><td><button class="tdb">Düzenle</button></td></tr>
+            <tr><td><strong>Galaxy Watch 6</strong></td><td>Aksesuar</td><td>7.200 ₺</td><td><span class="sp sp-cancel">✕ Pasif</span></td><td><button class="tdb">Düzenle</button></td></tr>
+          </tbody>
+        </table></div></div>
+        <div id="aU" style="display:none"><div class="twrap"><table>
+          <thead><tr><th>Ad Soyad</th><th>E-posta</th><th>Telefon</th><th>Kayıt</th><th>İlan</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Mehmet Yılmaz</strong></td><td>mehmet@mail.com</td><td>0532 XXX XX</td><td>10 Oca</td><td>3</td></tr>
+            <tr><td><strong>Ayşe Kara</strong></td><td>ayse@mail.com</td><td>0541 XXX XX</td><td>15 Şub</td><td>1</td></tr>
+            <tr><td><strong>Ali Demir</strong></td><td>ali@mail.com</td><td>0553 XXX XX</td><td>22 Mar</td><td>5</td></tr>
+            <tr><td><strong>Fatma Şahin</strong></td><td>fatma@mail.com</td><td>0505 XXX XX</td><td>5 Nis</td><td>2</td></tr>
+          </tbody>
+        </table></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const prods=[
+  {id:1,title:'iPhone 13 Pro Max 256GB',cat:'Telefon & Tablet',desc:'Az kullanılmış, kutulu. Batarya %89, küçük çizikler var.',price:'18.500',badge:'hot',bl:'FIRSAT',icon:'📱',bg:'c1',stars:5,views:234,age:'3 gün önce',d:{Durum:'Az Kullanılmış',Hafıza:'256 GB',Renk:'Sierra Blue',Garanti:'Yok',Kargo:'Evet'}},
+  {id:2,title:'MacBook Air M2 8GB/256GB',cat:'Bilgisayar',desc:'2023 model, uzay grisi. Herhangi bir hasar yok, şarj aleti dahil.',price:'32.000',badge:'new',bl:'YENİ GİBİ',icon:'💻',bg:'c2',stars:5,views:189,age:'5 gün önce',d:{Durum:'Yeni Gibi',Ekran:'13.6"',RAM:'8 GB',Depolama:'256 GB SSD',Kargo:'Evet'}},
+  {id:3,title:'PlayStation 5 + 2 Kol',cat:'Oyun & Konsol',desc:'Disk sürümü, 3 oyun hediye. Çok az kullanılmış, temiz.',price:'22.000',badge:'hot',bl:'POPÜLER',icon:'🎮',bg:'c3',stars:4,views:312,age:'1 gün önce',d:{Durum:'Az Kullanılmış',Sürüm:'Disk',Kumanda:'2 Adet',Oyun:'3 Oyun Dahil',Kargo:'Evet'}},
+  {id:4,title:'Canon EOS R50 Aynasız',cat:'Fotoğraf',desc:'18-45mm kit lens dahil. Çok az kullanıldı, çantası var.',price:'28.500',badge:'new',bl:'AZ KULLANILMIŞ',icon:'📷',bg:'c4',stars:5,views:156,age:'7 gün önce',d:{Durum:'Az Kullanılmış',Lens:'18-45mm Kit',Kılıf:'Çanta Dahil',Pil:'2 Adet',Kargo:'Evet'}},
+  {id:5,title:'İkea Koltuk Takımı 3+2+1',cat:'Ev & Mobilya',desc:'Bej renk, leke yok. Taşınma nedeniyle satılıyor.',price:'8.500',badge:'hot',bl:'FIRSAT',icon:'🛋️',bg:'c5',stars:4,views:98,age:'2 gün önce',d:{Durum:'Kullanılmış',Renk:'Bej',Set:'3+2+1',Malzeme:'Kumaş',Kargo:'Hayır'}},
+  {id:6,title:'Samsung Galaxy Watch 6',cat:'Giyim & Aksesuar',desc:'44mm Gümüş. Şarj kablosu ve kutusu mevcut. Hasarsız.',price:'7.200',badge:'new',bl:'SIFIR GİBİ',icon:'⌚',bg:'c6',stars:5,views:201,age:'4 gün önce',d:{Durum:'Sıfır Gibi',Boyut:'44mm',Renk:'Gümüş',Kutu:'Orijinal',Kargo:'Evet'}},
+];
+let favs=new Set(),curFilt='Tümü';
+
+function render(list){
+  document.getElementById('pcnt').textContent=list.length+' ilan';
+  document.getElementById('pgrid').innerHTML=list.map(p=>`
+    <div class="pc" onclick="openProd(${p.id})">
+      <div class="pimg ${p.bg}">
+        <div class="pci">${p.icon}</div>
+        <div class="bwrap"><span class="b b-${p.badge}">${p.bl}</span></div>
+        <button class="pfav ${favs.has(p.id)?'on':''}" onclick="togFav(event,${p.id})">${favs.has(p.id)?'❤️':'🤍'}</button>
+      </div>
+      <div class="pb">
+        <div class="pcat">${p.cat}</div>
+        <div class="ptitle">${p.title}</div>
+        <div class="pdesc">${p.desc}</div>
+        <div class="pmeta"><span>👁 ${p.views}</span><span>🕐 ${p.age}</span></div>
+        <div class="pfoot">
+          <div class="pprice">
+            <div class="pstars">${'★'.repeat(p.stars)}${'☆'.repeat(5-p.stars)}</div>
+            <div class="am">${p.price} ₺</div>
+            <div class="lbl">2. El Fiyat</div>
+          </div>
+          <a class="btn btn-wa" style="font-size:.8rem;padding:8px 14px" href="https://wa.me/905331685213?text=Merhaba!%20${encodeURIComponent(p.title)}%20hakkında%20bilgi%20almak%20istiyorum." target="_blank" onclick="event.stopPropagation()">💬 Satın Al</a>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function togFav(e,id){
+  e.stopPropagation();
+  favs.has(id)?(favs.delete(id),toast('Favorilerden çıkarıldı')):(favs.add(id),toast('❤️ Favorilere eklendi','success'));
+  filt(curFilt);
+}
+
+function filt(cat){
+  curFilt=cat;
+  document.querySelectorAll('.chip').forEach(c=>{
+    const t=c.textContent.replace(/\d+/g,'').trim().replace(/[📱💻🏠🎮📷🚗⌚]/gu,'').trim();
+    c.classList.toggle('on',cat==='Tümü'?t.startsWith('Tümü'):t.includes(cat)||c.textContent.includes(cat));
+  });
+  render(cat==='Tümü'?prods:prods.filter(p=>p.cat===cat));
+  if(cat!=='Tümü')goTo('urunler');
+}
+
+function doSearch(){
+  const q=document.getElementById('hs').value.toLowerCase().trim();
+  if(!q){filt('Tümü');return;}
+  render(prods.filter(p=>p.title.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q)));
+  goTo('urunler');
+  document.getElementById('hs').value='';
+}
+
+function openProd(id){
+  const p=prods.find(x=>x.id===id);if(!p)return;
+  document.getElementById('pMTitle').textContent=p.title;
+  document.getElementById('pMBody').innerHTML=`
+    <div><div class="pmimg ${p.bg}">${p.icon}</div></div>
+    <div class="pminfo">
+      <div class="pcat">${p.cat}</div>
+      <h3>${p.title}</h3>
+      <div class="pstars" style="font-size:.82rem">${'★'.repeat(p.stars)}${'☆'.repeat(5-p.stars)}</div>
+      <div class="pmprice">${p.price} ₺</div>
+      <p style="font-size:.82rem;color:var(--ink3);margin-bottom:10px;line-height:1.6">${p.desc}</p>
+      ${Object.entries(p.d).map(([k,v])=>`<div class="pmrow"><span>${k}</span><span>${v}</span></div>`).join('')}
+      <div class="pma">
+        <a class="btn btn-wa" style="justify-content:center;padding:12px" href="https://wa.me/905331685213?text=Merhaba!%20${encodeURIComponent(p.title)}%20hakkında%20bilgi%20almak%20istiyorum." target="_blank">💬 WhatsApp'tan Satın Al</a>
+        <button class="btn btn-ghost" style="justify-content:center" onclick="togFav(event,${p.id});cModal('pOvl')">${favs.has(p.id)?'❤️ Favorilerden Çıkar':'🤍 Favorilere Ekle'}</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('pOvl').classList.add('open');
+}
+
+function openAuth(t){document.getElementById('aOvl').classList.add('open');swTab(t==='login'?'l':'r')}
+function swTab(t){
+  ['l','r'].forEach(x=>{document.getElementById('tp-'+x).classList.toggle('on',x===t);document.getElementById('tc-'+x).classList.toggle('on',x===t)});
+  document.getElementById('aTitle').textContent=t==='l'?'Giriş Yapın':'Ücretsiz Üye Olun';
+}
+function doLogin(){cModal('aOvl');toast('✅ Giriş başarılı! Hoş geldiniz.','success')}
+function doReg(){cModal('aOvl');toast('🎉 Kayıt tamamlandı! Hoş geldiniz.','success')}
+
+function openAdm(){document.getElementById('admOvl').classList.add('open')}
+function admLogin(){
+  if(document.getElementById('aU').value==='admin'&&document.getElementById('aP').value==='admin123'){
+    document.getElementById('admLog').style.display='none';
+    document.getElementById('admDash').style.display='block';
+    toast('🛡️ Admin paneline hoş geldiniz!','success');
+  } else {
+    toast('Hatalı bilgiler! admin / admin123','error');
+  }
+}
+function aTab(el,id){
+  document.querySelectorAll('.at').forEach(t=>t.classList.remove('on'));el.classList.add('on');
+  ['aO','aP','aU'].forEach(x=>{const e=document.getElementById(x);if(e)e.style.display=x===id?'block':'none'});
+}
+
+function cModal(id){
+  document.getElementById(id).classList.remove('open');
+  if(id==='admOvl')setTimeout(()=>{document.getElementById('admLog').style.display='block';document.getElementById('admDash').style.display='none'},400);
+}
+function cOvl(e,id){if(e.target===document.getElementById(id))cModal(id)}
+
+function toast(msg,type=''){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='show'+(type?' '+type:'');
+  clearTimeout(t._t);t._t=setTimeout(()=>{t.className=''},2800);
+}
+
+function goTo(id){const e=document.getElementById(id);if(e)e.scrollIntoView({behavior:'smooth',block:'start'})}
+function goTop(){window.scrollTo({top:0,behavior:'smooth'})}
+
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>20));
+
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target)}})},{threshold:.14});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+
+render(prods);
+</script>
+</body>
+</html>
